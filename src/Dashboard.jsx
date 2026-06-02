@@ -62,40 +62,40 @@ const banksoalData = {
 const toChartData = (vals) => months.map((m, i) => ({ name: m, value: vals[i] }));
 
 const lanjutkanCards = [
-  { bg: "linear-gradient(135deg,#0f2744,#1565C0)", emoji: "👨‍🏫", tag: "UTBK", name: "Matematika Dasar", chapter: "Bab 3 — Limit Fungsi", pct: 62 },
-  { bg: "linear-gradient(135deg,#1a1a2e,#16213e)", emoji: "👩‍🔬", tag: "UTBK", name: "Fisika Gelombang", chapter: "Bab 5 — Gelombang Bunyi", pct: 45 },
-  { bg: "linear-gradient(135deg,#1a0d3b,#4527a0)", emoji: "🇬🇧", tag: "UTBK", name: "Bahasa Inggris", chapter: "Bab 2 — Reading Comp.", pct: 78 },
-  { bg: "linear-gradient(135deg,#0d3b2b,#1b5e20)", emoji: "🧪", tag: "UTBK", name: "Kimia Organik", chapter: "Bab 4 — Reaksi Ester", pct: 33 },
-  { bg: "linear-gradient(135deg,#3b0d2b,#880e4f)", emoji: "🧬", tag: "UTBK", name: "Biologi Genetika", chapter: "Bab 6 — Hukum Mendel", pct: 55 },
-  { bg: "linear-gradient(135deg,#1a1000,#e65100)", emoji: "🏛️", tag: "UTBK", name: "Sejarah Indonesia", chapter: "Bab 3 — Era Kolonial", pct: 40 },
-  { bg: "linear-gradient(135deg,#0d1b3e,#1a237e)", emoji: "💰", tag: "UTBK", name: "Ekonomi Makro", chapter: "Bab 1 — Mikro Dasar", pct: 20 },
+  { img: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Matematika Dasar", chapter: "Bab 3 — Limit Fungsi", pct: 62 },
+  { img: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Fisika Gelombang", chapter: "Bab 5 — Gelombang Bunyi", pct: 45 },
+  { img: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Bahasa Inggris", chapter: "Bab 2 — Reading Comp.", pct: 78 },
+  { img: "https://images.unsplash.com/photo-1628863353691-0071c8c1874c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", tag: "UTBK", name: "Kimia Organik", chapter: "Bab 4 — Reaksi Ester", pct: 33 },
+  { img: "https://images.unsplash.com/photo-1648792940059-3b782a7b8b20?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", tag: "UTBK", name: "Biologi Genetika", chapter: "Bab 6 — Hukum Mendel", pct: 55 },
+  { img: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Sejarah Indonesia", chapter: "Bab 3 — Era Kolonial", pct: 40 },
+  { img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Ekonomi Makro", chapter: "Bab 1 — Mikro Dasar", pct: 20 },
 ];
 
 const sainsCards = [
-  { bg: "linear-gradient(135deg,#0f2744,#1565C0)", emoji: "👨‍🏫", tag: "UTBK", name: "Matematika Dasar", instructor: "Dr. Budi Santoso" },
-  { bg: "linear-gradient(135deg,#1a1a2e,#16213e)", emoji: "👩‍🔬", tag: "UTBK", name: "Fisika Gelombang & Optik", instructor: "Sari Dewi, M.Si" },
-  { bg: "linear-gradient(135deg,#0d3b2b,#1b5e20)", emoji: "🧪", tag: "UTBK", name: "Kimia Organik", instructor: "Dr. Budi Santoso" },
-  { bg: "linear-gradient(135deg,#3b0d2b,#880e4f)", emoji: "🧬", tag: "UTBK", name: "Biologi Genetika", instructor: "Sari Dewi, M.Si", badge: "GRATIS" },
-  { bg: "linear-gradient(135deg,#0d2233,#0277bd)", emoji: "💻", tag: "UTBK", name: "Informatika Dasar", instructor: "Hendra Wijaya" },
-  { bg: "linear-gradient(135deg,#1a0011,#880e4f)", emoji: "🔢", tag: "SMA", name: "Matematika Peminatan", instructor: "Dr. Budi Santoso" },
+  { img: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Matematika Dasar", instructor: "Dr. Budi Santoso" },
+  { img: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Fisika Gelombang & Optik", instructor: "Sari Dewi, M.Si" },
+  { img: "https://images.unsplash.com/photo-1628863353691-0071c8c1874c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", tag: "UTBK", name: "Kimia Organik", instructor: "Dr. Budi Santoso" },
+  { img: "https://images.unsplash.com/photo-1648792940059-3b782a7b8b20?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", tag: "UTBK", name: "Biologi Genetika", instructor: "Sari Dewi, M.Si", badge: "GRATIS" },
+  { img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Informatika Dasar", instructor: "Hendra Wijaya" },
+  { img: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=300&q=80", tag: "SMA", name: "Matematika Peminatan", instructor: "Dr. Budi Santoso" },
 ];
 
 const bahasaCards = [
-  { bg: "linear-gradient(135deg,#1a0d3b,#4527a0)", emoji: "🇬🇧", tag: "UTBK", name: "Bahasa Inggris Intensif", instructor: "Anita Kusuma, S.Pd" },
-  { bg: "linear-gradient(135deg,#0d2233,#0277bd)", emoji: "📖", tag: "UTBK", name: "Bahasa Indonesia Literasi", instructor: "Nadia Pratiwi, M.Pd" },
-  { bg: "linear-gradient(135deg,#1f1200,#bf360c)", emoji: "✍️", tag: "UTBK", name: "Literasi Membaca", instructor: "Reza Firmansyah", badge: "GRATIS" },
-  { bg: "linear-gradient(135deg,#0d2b1a,#1b5e20)", emoji: "📝", tag: "SMA", name: "Menulis Kreatif", instructor: "Anita Kusuma, S.Pd" },
-  { bg: "linear-gradient(135deg,#0a1628,#1565c0)", emoji: "🔤", tag: "SMP", name: "Grammar & Structure", instructor: "Hendra Wijaya" },
-  { bg: "linear-gradient(135deg,#1a1200,#f57f17)", emoji: "📰", tag: "SMP", name: "Teks Berita & Opini", instructor: "Nadia Pratiwi, M.Pd" },
+  { img: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Bahasa Inggris Intensif", instructor: "Anita Kusuma, S.Pd" },
+  { img: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Bahasa Indonesia Literasi", instructor: "Nadia Pratiwi, M.Pd" },
+  { img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Literasi Membaca", instructor: "Reza Firmansyah", badge: "GRATIS" },
+  { img: "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=300&q=80", tag: "SMA", name: "Menulis Kreatif", instructor: "Anita Kusuma, S.Pd" },
+  { img: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=300&q=80", tag: "SMP", name: "Grammar & Structure", instructor: "Hendra Wijaya" },
+  { img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=300&q=80", tag: "SMP", name: "Teks Berita & Opini", instructor: "Nadia Pratiwi, M.Pd" },
 ];
 
 const sosialCards = [
-  { bg: "linear-gradient(135deg,#1a1000,#e65100)", emoji: "🏛️", tag: "UTBK", name: "Sejarah Indonesia", instructor: "Hendra Wijaya" },
-  { bg: "linear-gradient(135deg,#0d2b1a,#2e7d32)", emoji: "🌍", tag: "UTBK", name: "Geografi Lingkungan", instructor: "Dr. Budi Santoso" },
-  { bg: "linear-gradient(135deg,#0d1b3e,#1a237e)", emoji: "💰", tag: "UTBK", name: "Ekonomi Makro & Mikro", instructor: "Reza Firmansyah", badge: "GRATIS" },
-  { bg: "linear-gradient(135deg,#1a0d2e,#6a1b9a)", emoji: "⚖️", tag: "SMA", name: "Sosiologi Masyarakat", instructor: "Nadia Pratiwi, M.Pd" },
-  { bg: "linear-gradient(135deg,#0a1a2e,#0277bd)", emoji: "🏫", tag: "SMA", name: "PKN & Demokrasi", instructor: "Anita Kusuma, S.Pd" },
-  { bg: "linear-gradient(135deg,#1a0d00,#bf360c)", emoji: "🗺️", tag: "SMA", name: "Peta, SIG & Inderaja", instructor: "Hendra Wijaya" },
+  { img: "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Sejarah Indonesia", instructor: "Hendra Wijaya" },
+  { img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Geografi Lingkungan", instructor: "Dr. Budi Santoso" },
+  { img: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=300&q=80", tag: "UTBK", name: "Ekonomi Makro & Mikro", instructor: "Reza Firmansyah", badge: "GRATIS" },
+  { img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=300&q=80", tag: "SMA", name: "Sosiologi Masyarakat", instructor: "Nadia Pratiwi, M.Pd" },
+  { img: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=300&q=80", tag: "SMA", name: "PKN & Demokrasi", instructor: "Anita Kusuma, S.Pd" },
+  { img: "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=300&q=80", tag: "SMA", name: "Peta, SIG & Inderaja", instructor: "Hendra Wijaya" },
 ];
 
 const faqData = [
@@ -125,14 +125,19 @@ function ClassCard({ card, showProgress = false }) {
       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.2)" }}
       onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.12)" }}
     >
-      <div style={{ position: "absolute", inset: 0, background: card.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 52 }}>{card.emoji}</div>
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.84) 48%, rgba(0,0,0,0.18) 72%, rgba(0,0,0,0) 100%)" }} />
+      <div style={{
+        position: "absolute", inset: 0,
+        backgroundImage: `url(${card.img})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 35%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.1) 100%)" }} />
       {card.badge && <div style={{ position: "absolute", top: 10, right: 10, fontSize: 9, fontWeight: 700, background: "#22c55e", color: "#fff", padding: "3px 8px", borderRadius: 20 }}>{card.badge}</div>}
       {showProgress && <div style={{ position: "absolute", top: 10, left: 10, fontSize: 9, fontWeight: 700, background: "rgba(0,0,0,0.45)", color: "#fff", padding: "2px 7px", borderRadius: 10, backdropFilter: "blur(4px)" }}>{card.pct}%</div>}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "10px 12px 14px" }}>
         <div style={{ display: "inline-block", fontSize: 9, fontWeight: 700, padding: "2px 7px", borderRadius: 4, marginBottom: 5, background: tagColors[card.tag] || tagColors.UTBK, color: "#fff" }}>{card.tag}</div>
         <div style={{ fontSize: 12, fontWeight: 700, color: "#fff", lineHeight: 1.3, marginBottom: 3 }}>{card.name}</div>
-        <div style={{ fontSize: 10, color: "rgba(255,255,255,0.65)" }}>{showProgress ? card.chapter : card.instructor}</div>
+        <div style={{ fontSize: 10, color: "rgba(255,255,255,0.75)" }}>{showProgress ? card.chapter : card.instructor}</div>
       </div>
       {showProgress && (
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: "rgba(255,255,255,0.15)" }}>
@@ -185,7 +190,6 @@ function Sidebar({ activePage, onNavigate }) {
       <div className="logo" style={{ display: "flex", alignItems: "center", gap: 8, padding: "0 16px 24px", justifyContent: collapsed ? "center" : "flex-start" }}>
         <div style={{ width: 32, height: 32, borderRadius: 8, background: "#199DE9", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 700, color: "#fff", flexShrink: 0 }}>P</div>
         {!collapsed && <span className="logo-text" style={{ fontSize: 14, fontWeight: 700, color: "#181818" }}>Pahamify</span>}
-        {/* Collapse toggle — hidden on tablet/mobile via CSS */}
         <button className="btn-collapse" onClick={() => setCollapsed(!collapsed)} style={{ marginLeft: "auto", background: "none", border: "none", cursor: "pointer", color: "#7a7a7a", display: "flex", padding: 4 }}>
           <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <rect x={3} y={3} width={18} height={18} rx={2} />
@@ -288,7 +292,7 @@ function DashboardPage() {
         </div>
       </div>
 
-      {/* Charts — stacks to 1-col on mobile via .grid-2 class */}
+      {/* Charts */}
       <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         {/* TryOut */}
         <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: "16px 20px" }}>
@@ -404,10 +408,38 @@ function PusatBelajar() {
 function Bantuan() {
   const [openFaq, setOpenFaq] = useState(0);
   const mentorList = [
-    { emoji: "👩‍🔬", bg: "#E3F2FD", name: "Sari Dewi, M.Si", sub: "Fisika & Kimia", online: true, rating: "4.7" },
-    { emoji: "👩‍🏫", bg: "#FFF3E0", name: "Anita Kusuma, S.Pd", sub: "B. Indonesia & B. Inggris", online: false, rating: "4.9" },
-    { emoji: "👨‍🎓", bg: "#FCE4EC", name: "Hendra Wijaya", sub: "Sejarah & Geografi", online: false, rating: "4.6" },
-    { emoji: "👩‍💼", bg: "#EDE7F6", name: "Nadia Pratiwi, M.Pd", sub: "Sosiologi & PKN", online: true, rating: "4.8" },
+    {
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      bg: "#E3F2FD",
+      name: "Sari Dewi, M.Si",
+      sub: "Fisika & Kimia",
+      online: true,
+      rating: "4.7"
+    },
+    {
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
+      bg: "#FFF3E0",
+      name: "Anita Kusuma, S.Pd",
+      sub: "B. Indonesia & B. Inggris",
+      online: false,
+      rating: "4.9"
+    },
+    {
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      bg: "#FCE4EC",
+      name: "Hendra Wijaya",
+      sub: "Sejarah & Geografi",
+      online: false,
+      rating: "4.6"
+    },
+    {
+      image: "https://randomuser.me/api/portraits/women/21.jpg",
+      bg: "#EDE7F6",
+      name: "Nadia Pratiwi, M.Pd",
+      sub: "Sosiologi & PKN",
+      online: true,
+      rating: "4.8"
+    }
   ];
   const contactChannels = [
     { icon: "💬", bg: "#E3F2FD", name: "Live Chat", sub: "Respons dalam ~2 menit" },
@@ -423,7 +455,11 @@ function Bantuan() {
         <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
           {/* Featured mentor */}
           <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: 20, display: "flex", gap: 16, alignItems: "flex-start" }}>
-            <div style={{ width: 72, height: 72, borderRadius: "50%", background: "linear-gradient(135deg,#C7EBFF,#83D1FF)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28, flexShrink: 0 }}>👨‍🏫</div>
+            <img
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&h=150&q=80"
+              alt="Dr. Budi Santoso"
+              style={{ width: 72, height: 72, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+            />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 14, fontWeight: 600, color: "#181818", marginBottom: 2 }}>Dr. Budi Santoso</div>
               <div style={{ fontSize: 12, color: "#199DE9", fontWeight: 500, marginBottom: 6 }}>Mentor Matematika & Fisika</div>
@@ -450,7 +486,17 @@ function Bantuan() {
           <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: "16px 20px" }}>
             {mentorList.map((m, i) => (
               <div key={i} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 0", borderBottom: i < mentorList.length - 1 ? "0.5px solid #f0f0f0" : "none", cursor: "pointer" }}>
-                <div style={{ width: 40, height: 40, borderRadius: "50%", background: m.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, flexShrink: 0 }}>{m.emoji}</div>
+                <img
+                  src={m.image}
+                  alt={m.name}
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                    flexShrink: 0
+                  }}
+                />
                 <div>
                   <div style={{ fontSize: 12, fontWeight: 600, color: "#282828" }}>{m.name}</div>
                   <div style={{ fontSize: 11, color: "#7a7a7a" }}>{m.sub}</div>
@@ -471,7 +517,7 @@ function Bantuan() {
           <div style={{ fontSize: 14, fontWeight: 600, color: "#282828", marginBottom: 4 }}>FAQ</div>
           {faqData.map((f, i) => (
             <div key={i} style={{ borderBottom: i < faqData.length - 1 ? "0.5px solid #f0f0f0" : "none" }}>
-              <div onClick={() => setOpenFaq(openFaq === i ? -1 : i)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 0", cursor: "pointer" }}>
+              <div onClick={() => setOpenFaq(openFaq === i ? -1 : i)} style={{ display: "flex", alignItems: "center", justifycontent: "space-between", padding: "12px 0", cursor: "pointer" }}>
                 <span style={{ fontSize: 12, fontWeight: 500, color: openFaq === i ? "#199DE9" : "#282828", flex: 1, paddingRight: 8 }}>{f.q}</span>
                 <span style={{ fontSize: 14, color: openFaq === i ? "#199DE9" : "#7a7a7a", transition: "transform 0.2s", transform: openFaq === i ? "rotate(180deg)" : "none", display: "inline-block" }}>⌄</span>
               </div>
@@ -485,7 +531,7 @@ function Bantuan() {
           <div style={{ fontSize: 13, fontWeight: 600, color: "#282828" }}>Hubungi Kami</div>
           <div style={{ fontSize: 11, color: "#7a7a7a", lineHeight: 1.6 }}>Butuh bantuan lebih lanjut? Tim support kami siap membantu kamu setiap hari pukul 08.00–22.00 WIB.</div>
           {contactChannels.map((c, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 10, background: "#f7f9fc", border: "0.5px solid #e8e8e8", cursor: "pointer", transition: "border-color 0.15s" }}
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 10, background: c.bg, border: "0.5px solid #e8e8e8", cursor: "pointer", transition: "border-color 0.15s" }}
               onMouseEnter={e => e.currentTarget.style.borderColor = "#38B6FF"}
               onMouseLeave={e => e.currentTarget.style.borderColor = "#e8e8e8"}
             >
@@ -520,7 +566,6 @@ export default function App() {
 
   return (
     <div style={{ fontFamily: "'Poppins',sans-serif", display: "flex", height: "100vh", minHeight: 700, background: "#f5f7fa", color: "#181818" }}>
-      {/* Inject responsive CSS */}
       <style>{responsiveCSS}</style>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
 
@@ -533,7 +578,6 @@ export default function App() {
         {page === "bantuan" && <Bantuan />}
       </div>
 
-      {/* Bottom nav — visible on mobile only via CSS */}
       <BottomNav activePage={page} onNavigate={setPage} />
     </div>
   );
