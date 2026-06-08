@@ -5,6 +5,12 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Responsive
 const responsiveCSS = `
   :root { --sidebar-w: 176px; --topbar-h: 52px; --bottomnav-h: 56px; }
 
+  /* Global viewport override for mobile scale stability */
+  body, #root {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
   /* Tablet: icon-only sidebar */
   @media (max-width: 900px) {
     .sidebar { width: 56px !important; min-width: 56px !important; }
@@ -22,8 +28,35 @@ const responsiveCSS = `
     .sidebar { display: none !important; }
     .bottom-nav { display: flex !important; }
     .app-content { padding: 12px 12px calc(var(--bottomnav-h) + 12px) !important; }
-    .topbar { padding: 0 12px !important; }
+    .topbar { 
+      padding: 10px 12px !important; 
+      height: auto !important; 
+      flex-wrap: wrap !important;
+      gap: 8px !important;
+    }
+    .topbar-search-container {
+      order: 3;
+      min-width: 100% !important;
+      max-width: 100% !important;
+    }
     .grid-2 { grid-template-columns: 1fr !important; }
+    
+    /* Responsive Mentor Layout Fixes */
+    .mentor-featured-card {
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+    }
+    .mentor-featured-card .tags-wrapper {
+      justify-content: center !important;
+    }
+    .mentor-featured-card .stats-wrapper {
+      justify-content: center !important;
+    }
+    .mentor-featured-card button {
+      width: 100% !important;
+      justify-content: center !important;
+    }
   }
 
   /* Two-col grid (stacks on mobile via above rule) */
@@ -154,7 +187,7 @@ function ScrollRow({ cards, showProgress = false }) {
   return (
     <div style={{ position: "relative" }}>
       <button className="scroll-btn" onClick={() => scroll(-1)} style={{ position: "absolute", top: "50%", transform: "translateY(-56%)", left: -14, width: 28, height: 28, borderRadius: "50%", background: "#fff", border: "0.5px solid #d6d6d6", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 2, boxShadow: "0 1px 4px rgba(0,0,0,0.10)" }}>‹</button>
-      <div ref={rowRef} style={{ display: "flex", gap: 12, overflowX: "auto", paddingBottom: 8, scrollBehavior: "smooth", scrollbarWidth: "thin" }}>
+      <div ref={rowRef} style={{ display: "flex", gap: 12, overflowX: "auto", paddingBottom: 8, scrollBehavior: "smooth", scrollbarWidth: "none" }}>
         {cards.map((c, i) => <ClassCard key={i} card={c} showProgress={showProgress} />)}
       </div>
       <button className="scroll-btn" onClick={() => scroll(1)} style={{ position: "absolute", top: "50%", transform: "translateY(-56%)", right: -14, width: 28, height: 28, borderRadius: "50%", background: "#fff", border: "0.5px solid #d6d6d6", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 2, boxShadow: "0 1px 4px rgba(0,0,0,0.10)" }}>›</button>
@@ -248,16 +281,79 @@ function BottomNav({ activePage, onNavigate }) {
 // ─── TOPBAR ───────────────────────────────────────────────────────────────────
 function Topbar({ title, placeholder = "Mau belajar apa hari ini?" }) {
   return (
-    <div className="topbar" style={{ background: "#fff", borderBottom: "0.5px solid #e0e0e0", padding: "0 24px", height: 56, display: "flex", alignItems: "center", gap: 16, flexShrink: 0 }}>
-      <span style={{ fontSize: 15, fontWeight: 600, color: "#181818", whiteSpace: "nowrap" }}>{title}</span>
-      <div style={{ flex: 1, maxWidth: 480, position: "relative" }}>
-        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#7a7a7a", fontSize: 14 }}>🔍</span>
-        <input style={{ width: "100%", height: 36, border: "0.5px solid #d6d6d6", borderRadius: 20, padding: "0 12px 0 36px", fontSize: 13, fontFamily: "'Poppins',sans-serif", background: "#f7f9fc", color: "#181818", outline: "none" }} placeholder={placeholder} />
+    <div className="topbar" style={{
+      background: "#fff",
+      borderBottom: "0.5px solid #e0e0e0",
+      padding: "10px 16px", /* Padding disesuaikan agar proporsional saat 1 atau 2 baris */
+      minHeight: 56,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      flexWrap: "wrap", /* KUNCI UTAMA: Mengizinkan elemen turun ke bawah jika tidak muat */
+      gap: "10px 12px", /* Gap horizontal 12px, gap vertikal jika turun kasur sebesar 10px */
+      flexShrink: 0,
+      width: "100%",
+      boxSizing: "border-box"
+    }}>
+
+      {/* SISI KIRI: Judul Halaman */}
+      <div style={{
+        fontSize: 15,
+        fontWeight: 600,
+        color: "#181818",
+        whiteSpace: "nowrap",
+        flexShrink: 0
+      }}>
+        {title}
       </div>
-      <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8 }}>
+
+      {/* SISI TENAH / BAWAH: Kontainer Search Bar */}
+      {/* Menggunakan order: 3 di media query css jika ingin di bawah profil, 
+          atau biarkan flex-wrap alami mengikuti urutan DOM html */}
+      <div className="topbar-search" style={{
+        flex: 1,
+        minWidth: "240px", /* Memaksa search bar turun ke bawah jika sisa ruang di samping judul kurang dari 240px */
+        maxWidth: 480,
+        position: "relative",
+      }}>
+        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#7a7a7a", fontSize: 14 }}>🔍</span>
+        <input style={{
+          width: "100%",
+          height: 36,
+          border: "0.5px solid #d6d6d6",
+          borderRadius: 20,
+          padding: "0 12px 0 36px",
+          fontSize: 13,
+          fontFamily: "'Poppins',sans-serif",
+          background: "#f7f9fc",
+          color: "#181818",
+          outline: "none",
+          boxSizing: "border-box"
+        }} placeholder={placeholder} />
+      </div>
+
+      {/* SISI KANAN: Menu Aksi (Notifikasi & Profil) */}
+      <div className="topbar-actions" style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        flexShrink: 0,
+      }}>
         <div style={{ width: 36, height: 36, borderRadius: "50%", border: "0.5px solid #e0e0e0", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 16 }}>🔔</div>
         <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#D5F0FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 600, color: "#199DE9" }}>AR</div>
       </div>
+
+      {/* Tweak CSS Tambahan untuk merapikan urutan susunan khusus di layar mobile kecil */}
+      <style>{`
+        @media (max-width: 500px) {
+          .topbar-search {
+            order: 3; /* Memaksa search bar berada di urutan paling bawah setelah judul & profil */
+            width: 100%;
+            max-width: 100% !important;
+          }
+        }
+      `}</style>
+
     </div>
   );
 }
@@ -275,17 +371,25 @@ function DashboardPage() {
   ];
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "20px 24px", display: "flex", flexDirection: "column", gap: 20 }}>
-      {/* Streak */}
+    <div className="app-content" style={{ flex: 1, overflowY: "auto", padding: "20px 24px", display: "flex", flexDirection: "column", gap: 20 }}>
+      {/* Streak Layout Fix */}
       <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: "16px 20px" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 14 }}>
           <span style={{ fontSize: 13, fontWeight: 600, color: "#282828" }}>🔥 Day Streak</span>
           <span style={{ fontSize: 13, fontWeight: 600, color: "#199DE9" }}>4 hari berturut-turut 🔥</span>
         </div>
-        <div style={{ display: "flex", gap: 8 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", width: "100%", gap: 4 }}>
           {streakDays.map((d, i) => (
             <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, flex: 1 }}>
-              <span style={{ fontSize: 10, color: d.today ? "#199DE9" : "#7a7a7a", fontWeight: d.today ? 600 : 500 }}>{d.label}</span>
+              <span style={{
+                fontSize: "9px",
+                color: d.today ? "#199DE9" : "#7a7a7a",
+                fontWeight: d.today ? 600 : 500,
+                whiteSpace: "nowrap", /* Mencegah teks terpotong atau membuat baris baru */
+                display: "inline-block" /* Memastikan properti nowrap bekerja sempurna */
+              }}>
+                {d.label}
+              </span>
               <span style={{ fontSize: 20, lineHeight: 1, filter: d.active ? "none" : "grayscale(1) opacity(0.3)" }}>🔥</span>
             </div>
           ))}
@@ -295,7 +399,7 @@ function DashboardPage() {
       {/* Charts */}
       <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         {/* TryOut */}
-        <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: "16px 20px" }}>
+        <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: "16px 20px", minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
             <span style={{ fontSize: 13, fontWeight: 600, color: "#282828" }}>TryOut UTBK</span>
             <span style={{ fontSize: 10, fontWeight: 600, padding: "3px 8px", borderRadius: 6, background: "#EEF9FF", color: "#199DE9" }}>12 sesi</span>
@@ -308,9 +412,9 @@ function DashboardPage() {
               </button>
             ))}
           </div>
-          <div style={{ height: 120 }}>
+          <div style={{ height: 120, width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={toChartData(toData.vals)} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
+              <LineChart data={toChartData(toData.vals)} margin={{ top: 4, right: 4, bottom: 0, left: -24 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#aaa" }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 9, fill: "#aaa" }} axisLine={false} tickLine={false} tickCount={4} />
@@ -319,18 +423,18 @@ function DashboardPage() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
+          <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
             {[{ l: "Nilai terakhir", v: toData.last }, { l: "Tertinggi", v: toData.high }, { l: "Rata-rata", v: toData.avg }].map((s, i) => (
-              <div key={i} style={{ flex: 1, background: "#f7f9fc", borderRadius: 8, padding: "8px 10px" }}>
-                <div style={{ fontSize: 10, color: "#7a7a7a", marginBottom: 2 }}>{s.l}</div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "#199DE9" }}>{s.v}</div>
+              <div key={i} style={{ flex: 1, background: "#f7f9fc", borderRadius: 8, padding: "8px 6px", textAlign: "center" }}>
+                <div style={{ fontSize: 9, color: "#7a7a7a", marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden" }}>{s.l}</div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: "#199DE9" }}>{s.v}</div>
               </div>
             ))}
           </div>
         </div>
 
         {/* Bank Soal */}
-        <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: "16px 20px" }}>
+        <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: "16px 20px", minWidth: 0 }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}>
             <span style={{ fontSize: 13, fontWeight: 600, color: "#282828" }}>Bank Soal</span>
             <span style={{ fontSize: 10, fontWeight: 600, padding: "3px 8px", borderRadius: 6, background: "#E8F5E9", color: "#2E7D32" }}>840 soal</span>
@@ -343,9 +447,9 @@ function DashboardPage() {
               </button>
             ))}
           </div>
-          <div style={{ height: 120 }}>
+          <div style={{ height: 120, width: "100%" }}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={toChartData(bsData.vals)} margin={{ top: 4, right: 4, bottom: 0, left: -20 }}>
+              <BarChart data={toChartData(bsData.vals)} margin={{ top: 4, right: 4, bottom: 0, left: -24 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
                 <XAxis dataKey="name" tick={{ fontSize: 9, fill: "#aaa" }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fontSize: 9, fill: "#aaa" }} axisLine={false} tickLine={false} tickCount={4} />
@@ -354,11 +458,11 @@ function DashboardPage() {
               </BarChart>
             </ResponsiveContainer>
           </div>
-          <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
-            {[{ l: "Total dikerjakan", v: bsData.total }, { l: "Benar", v: bsData.benar }, { l: "Akurasi", v: bsData.akurasi }].map((s, i) => (
-              <div key={i} style={{ flex: 1, background: "#f7f9fc", borderRadius: 8, padding: "8px 10px" }}>
-                <div style={{ fontSize: 10, color: "#7a7a7a", marginBottom: 2 }}>{s.l}</div>
-                <div style={{ fontSize: 14, fontWeight: 600, color: "#2E7D32" }}>{s.v}</div>
+          <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+            {[{ l: "Total", v: bsData.total }, { l: "Benar", v: bsData.benar }, { l: "Akurasi", v: bsData.akurasi }].map((s, i) => (
+              <div key={i} style={{ flex: 1, background: "#f7f9fc", borderRadius: 8, padding: "8px 6px", textAlign: "center" }}>
+                <div style={{ fontSize: 9, color: "#7a7a7a", marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden" }}>{s.l}</div>
+                <div style={{ fontSize: 13, fontWeight: 600, color: "#2E7D32" }}>{s.v}</div>
               </div>
             ))}
           </div>
@@ -385,14 +489,14 @@ function PusatBelajar() {
   ];
   return (
     <>
-      <div style={{ background: "#fff", borderBottom: "0.5px solid #e0e0e0", display: "flex", flexShrink: 0, overflowX: "auto" }}>
+      <div style={{ background: "#fff", borderBottom: "0.5px solid #e0e0e0", display: "flex", flexShrink: 0, overflowX: "auto", scrollbarWidth: "none" }}>
         {subTabs.map(t => (
           <div key={t} onClick={() => setSubTab(t)} style={{ padding: "13px 28px", fontSize: 13, fontWeight: subTab === t ? 600 : 400, color: subTab === t ? "#199DE9" : "#7a7a7a", cursor: "pointer", borderBottom: subTab === t ? "2px solid #199DE9" : "2px solid transparent", transition: "all 0.15s", whiteSpace: "nowrap" }}>
             {t}
           </div>
         ))}
       </div>
-      <div style={{ flex: 1, overflowY: "auto", padding: "20px 24px" }}>
+      <div className="app-content" style={{ flex: 1, overflowY: "auto", padding: "20px 24px" }}>
         {sections.map(sec => (
           <div key={sec.title} style={{ marginBottom: 28 }}>
             <SectionHeader title={sec.title} />
@@ -449,12 +553,12 @@ function Bantuan() {
   ];
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", padding: "20px 24px", display: "flex", flexDirection: "column", gap: 20 }}>
+    <div className="app-content" style={{ flex: 1, overflowY: "auto", padding: "20px 24px", display: "flex", flexDirection: "column", gap: 20 }}>
       <div>
         <div style={{ fontSize: 14, fontWeight: 600, color: "#282828", marginBottom: 12 }}>Mentor</div>
         <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
           {/* Featured mentor */}
-          <div style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: 20, display: "flex", gap: 16, alignItems: "flex-start" }}>
+          <div className="mentor-featured-card" style={{ background: "#fff", borderRadius: 14, border: "0.5px solid #e8e8e8", padding: 20, display: "flex", gap: 16, alignItems: "flex-start" }}>
             <img
               src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&h=150&q=80"
               alt="Dr. Budi Santoso"
@@ -463,13 +567,13 @@ function Bantuan() {
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 14, fontWeight: 600, color: "#181818", marginBottom: 2 }}>Dr. Budi Santoso</div>
               <div style={{ fontSize: 12, color: "#199DE9", fontWeight: 500, marginBottom: 6 }}>Mentor Matematika & Fisika</div>
-              <div style={{ fontSize: 11, color: "#7a7a7a", lineHeight: 1.6, marginBottom: 10 }}>Pengajar berpengalaman 12 tahun, spesialis persiapan UTBK Saintek. Lulusan ITB jurusan Teknik Fisika.</div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 12 }}>
+              <div style={{ fontSize: 11, color: "#7a7a7a", lineHeight: 1.6, marginBottom: 10 }}>Pengajar berpengalaman 12 tahun, persiapan UTBK Saintek. Lulusan ITB.</div>
+              <div className="tags-wrapper" style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 12 }}>
                 {["Matematika", "Fisika", "UTBK"].map(t => (
                   <span key={t} style={{ fontSize: 10, fontWeight: 600, padding: "3px 8px", borderRadius: 6, background: "#EEF9FF", color: "#199DE9" }}>{t}</span>
                 ))}
               </div>
-              <div style={{ display: "flex", gap: 16 }}>
+              <div className="stats-wrapper" style={{ display: "flex", gap: 16 }}>
                 {[{ v: "1.240", l: "Siswa" }, { v: "4.9 ★", l: "Rating" }, { v: "12 thn", l: "Pengalaman" }].map((s, i) => (
                   <div key={i} style={{ display: "flex", flexDirection: "column" }}>
                     <span style={{ fontSize: 14, fontWeight: 600, color: "#181818" }}>{s.v}</span>
@@ -497,11 +601,11 @@ function Bantuan() {
                     flexShrink: 0
                   }}
                 />
-                <div>
-                  <div style={{ fontSize: 12, fontWeight: 600, color: "#282828" }}>{m.name}</div>
-                  <div style={{ fontSize: 11, color: "#7a7a7a" }}>{m.sub}</div>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: "#282828", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.name}</div>
+                  <div style={{ fontSize: 11, color: "#7a7a7a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.sub}</div>
                 </div>
-                <div style={{ marginLeft: "auto", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
+                <div style={{ marginLeft: "auto", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
                   <div style={{ width: 8, height: 8, borderRadius: "50%", background: m.online ? "#4CAF50" : "#d6d6d6" }} />
                   <div style={{ fontSize: 10, color: "#FF9800", fontWeight: 600 }}>★ {m.rating}</div>
                 </div>
@@ -536,11 +640,11 @@ function Bantuan() {
               onMouseLeave={e => e.currentTarget.style.borderColor = "#e8e8e8"}
             >
               <div style={{ width: 36, height: 36, borderRadius: 8, background: c.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{c.icon}</div>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: "#282828" }}>{c.name}</div>
-                <div style={{ fontSize: 10, color: "#7a7a7a" }}>{c.sub}</div>
+              <div style={{ minWidth: 0, flex: 1 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "#282828", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{c.name}</div>
+                <div style={{ fontSize: 10, color: "#7a7a7a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{c.sub}</div>
               </div>
-              <span style={{ marginLeft: "auto", color: "#c1c1c1", fontSize: 14 }}>›</span>
+              <span style={{ marginLeft: "auto", color: "#c1c1c1", fontSize: 14, flexShrink: 0 }}>›</span>
             </div>
           ))}
         </div>
@@ -561,11 +665,11 @@ export default function App() {
   const searchPlaceholders = {
     "dashboard": "Mau belajar apa hari ini?",
     "pusat-belajar": "Mau belajar apa hari ini?",
-    "bantuan": "Cari pertanyaan atau topik bantuan...",
+    "bantuan": "Cari bantuan...",
   };
 
   return (
-    <div style={{ fontFamily: "'Poppins',sans-serif", display: "flex", height: "100vh", minHeight: 700, background: "#f5f7fa", color: "#181818" }}>
+    <div style={{ fontFamily: "'Poppins',sans-serif", display: "flex", height: "100vh", background: "#f5f7fa", color: "#181818" }}>
       <style>{responsiveCSS}</style>
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
 
