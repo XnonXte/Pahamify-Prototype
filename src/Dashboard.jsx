@@ -14,7 +14,7 @@
 
     
     /* TABLET */
-   @media (max-width:1024px) and (min-width:500px){
+   @media (max-width:1024px) and (min-width:600px){
 
   .sidebar{
     display:none !important;
