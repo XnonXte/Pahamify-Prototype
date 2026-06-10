@@ -603,8 +603,7 @@ function Topbar({ title, placeholder = "Mau belajar apa hari ini?" }) {
         gap: 8,
         flexShrink: 0,
       }}>
-        <div style={{ width: 36, height: 36, borderRadius: "50%", border: "0.5px solid #e0e0e0", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 16 }}>🔔</div>
-
+        {/* Bell icon removed */}
       </div>
 
       {/* Tweak CSS Tambahan untuk merapikan urutan susunan khusus di layar mobile kecil */}
