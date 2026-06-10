@@ -543,24 +543,25 @@ function TabletNavbar({ activePage, onNavigate }) {
 }
 
 // ─── TOPBAR ───────────────────────────────────────────────────────────────────
+// ─── TOPBAR ───────────────────────────────────────────────────────────────────
 function Topbar({ title, placeholder = "Mau belajar apa hari ini?" }) {
   return (
     <div className="topbar" style={{
       background: "#fff",
       borderBottom: "0.5px solid #e0e0e0",
-      padding: "10px 16px", /* Padding disesuaikan agar proporsional saat 1 atau 2 baris */
+      padding: "10px 24px", /* Padding disesuaikan agar pas dengan grid konten di bawahnya */
       minHeight: 56,
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      flexWrap: "wrap", /* KUNCI UTAMA: Mengizinkan elemen turun ke bawah jika tidak muat */
-      gap: "10px 12px", /* Gap horizontal 12px, gap vertikal jika turun kasur sebesar 10px */
+      flexWrap: "nowrap", /* Di desktop dipaksa sejajar agar memanjang sempurna */
+      gap: "0 24px",
       flexShrink: 0,
       width: "100%",
       boxSizing: "border-box"
     }}>
 
-      {/* SISI KIRI: Judul Halaman */}
+      {/* SISI KIRI: Judul Halaman (Page) */}
       <div style={{
         fontSize: 15,
         fontWeight: 600,
@@ -571,47 +572,49 @@ function Topbar({ title, placeholder = "Mau belajar apa hari ini?" }) {
         {title}
       </div>
 
-      {/* SISI TENAH / BAWAH: Kontainer Search Bar */}
-      {/* Menggunakan order: 3 di media query css jika ingin di bawah profil, 
-          atau biarkan flex-wrap alami mengikuti urutan DOM html */}
-      <div className="topbar-search" style={{
-        flex: 1,
-        minWidth: "240px", /* Memaksa search bar turun ke bawah jika sisa ruang di samping judul kurang dari 240px */
-        maxWidth: 480,
-        position: "relative",
-      }}>
-        <span style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", color: "#7a7a7a", fontSize: 14 }}>🔍</span>
-        <input style={{
-          width: "100%",
-          height: 36,
-          border: "0.5px solid #d6d6d6",
-          borderRadius: 20,
-          padding: "0 12px 0 36px",
-          fontSize: 13,
-          fontFamily: "'Poppins',sans-serif",
-          background: "#f7f9fc",
-          color: "#181818",
-          outline: "none",
-          boxSizing: "border-box"
-        }} placeholder={placeholder} />
-      </div>
-
-      {/* SISI KANAN: Menu Aksi (Notifikasi & Profil) */}
+      {/* AREA UTAMA: Search bar dibuat memanjang penuh ke kiri sesuai image_d42cb5.jpg */}
       <div className="topbar-actions" style={{
         display: "flex",
         alignItems: "center",
-        gap: 8,
         flexShrink: 0,
+        flex: 1, /* KUNCI UTAMA: Mengambil semua sisa ruang kosong yang tersedia di sebelah kiri */
+        justifyContent: "flex-end", /* Tetap rapat kanan untuk menjaga sisi margin luar */
       }}>
-        {/* Bell icon removed */}
+        <div className="topbar-search" style={{
+          width: "100%", /* Memaksa input mengisi seluruh area panjang flex container */
+          maxWidth: "540px", /* Batas maksimal diperbesar secara masif agar kolomnya terlihat sangat panjang */
+          position: "relative",
+        }}>
+          <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", color: "#7a7a7a", fontSize: 14 }}>🔍</span>
+          <input style={{
+            width: "100%",
+            height: 38,
+            border: "0.5px solid #d6d6d6",
+            borderRadius: 20,
+            padding: "0 16px 0 42px",
+            fontSize: 13,
+            fontFamily: "'Poppins',sans-serif",
+            background: "#f7f9fc",
+            color: "#181818",
+            outline: "none",
+            boxSizing: "border-box"
+          }} placeholder={placeholder} />
+        </div>
       </div>
 
-      {/* Tweak CSS Tambahan untuk merapikan urutan susunan khusus di layar mobile kecil */}
+      {/* Tweak CSS Responsif khusus untuk tampilan mobile agar tidak rusak saat mengecil */}
       <style>{`
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
+          .topbar {
+            flex-wrap: wrap !important;
+            padding: 10px 16px !important;
+          }
+          .topbar-actions {
+            width: 100% !important;
+            flex: none !important;
+            margin-top: 4px;
+          }
           .topbar-search {
-            order: 3; /* Memaksa search bar berada di urutan paling bawah setelah judul & profil */
-            width: 100%;
             max-width: 100% !important;
           }
         }
